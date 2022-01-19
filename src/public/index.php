@@ -1,6 +1,8 @@
 <!doctype html>
 <html class="no-js" lang="">
 
+<!--netstat -tulpn | grep --color :80 проверка свободен ли порт.-->
+
 <head>
     <meta charset="utf-8">
     <title>Palmo Helloe world</title>
@@ -15,76 +17,95 @@
 
 <!-- Add your site or application content here -->
 <main style="display: flex; justify-content:center; margin-top: 25px;">
+    <!--    <img src="palmo.jpg" alt="">-->
+    <form name="file_upload" method="post" action="form.php" enctype="multipart/form-data">
+    <label>Файл<input type="file" name="your_file">
+        <input type="submit" name="send" value="Отправить файл">
+
+        <form name="feedback" method="post" action="form.php"
+        <label>Ваше имя: <input type="text" name="new_name" value="<?php echo isset($_COOKIE['new_name']) ? $_COOKIE['new_name'] : ''?>"></label>
+        <label>Пароль: <input type="text" name="new_password"</label>
+        <label> Повторите пароль: <input type="text" name="repeat_password"</label>
+        <label>Ваш номер телефона: <input type="number" name="phone" value="<?php echo isset($_COOKIE['phone']) ? $_COOKIE['phone'] : ''?>"</label>
+        <input type="submit" name="send" value="Зарегестрироватся">
     <?php
 
-   // 1. Создать переменную $name и задать ей значение с именем, результат вывести на страницу с помощью echo;
-    $name = 'slava';
-    echo $name.'<br>' ;
-    //2. Создать две переменные $а = 8 и $b = 1, вывести на страницу результаты основных математических операций (+ - / * и остаток от деления (%));
-    $a = 8;
-    $b = 1;
-    echo ($a + $b).'<br>';
-    echo ($a - $b).'<br>';
-    echo ($a / $b).'<br>';
-    echo ($a * $b).'<br>';
-    echo ($a % $b).'<br>';
-    //3. Создайте переменную $number = 5, в переменную $result запишите значение $number в 3 степени. Результат выведите на экран.
-    $number = 5;
-    $result = pow($number,3);
-    echo $result.'<br>';
 
-    //4. Внесите в переменную $age ваш возраст. Если возраст в пределах от 18 до 60 лет, то выведите на экран сообщение "Вам ещё работать и работать";
-    $age = 32;
-    if( $age > 18 && $age < 60 ){
-        echo 'Вам еще работать и работать !'.'<br>';
+    $arr = ['яблоко','груша','арбуз','малина','клубника','виноград','киви','слива','банан','мандарин'];
+    $file1 = fopen('fruits.txt', 'w+' );
+    natsort($arr);      // сортирует
+//    print_r($arr);
+    for($i = 0; $i < count($arr); $i++){
+          fwrite($file1, $arr[$i]. PHP_EOL);     // записывает не отсортированный, падло. Почему ?
     }
 
-    //5. Расширьте задачу 4. Если возраст меньше 18 или больше 60, то вывести сообщения "Вам ещё рано работать" и "Пора на отдых" соответственно;
-    if( $age <18 ){
-        echo 'Вам еще рано работать'.'<br>';
-    } else {
-        echo 'Пора на отдых'.'<br>';
-    }
-    //6. Создайте переменную $dayNumber с номером для недели. Если номер дня в пределах от 1 до 5 то вывести сообщение "Это рабочий день", если 6-7 то "Это выходной", если значение $dayNumber не в пределах 1-7 то вывести сообщение об ошибке;
-    $dayNumber = 8;
-    if($dayNumber >= 1 && $dayNumber <= 5){
-        echo 'Это рабочий день'.'<br>';
-    } else if($dayNumber >= 6 && $dayNumber <= 7){
-        echo 'Это выходной'.'<br>';
-    } else {
-        echo 'Error'.'<br>';
-    }
 
-    //7. Объявите константу DAYS_COUNT равную 7 и константу MONTH_COUNT равную 12 двумя разными способами объявления констант. Выведите значение констант на страницу;
-    define('DAYS_COUNT', 7);
-    const MONTH_COUNT = 12;
-    echo MONTH_COUNT.'<br>';
-    echo DAYS_COUNT.'<br>';
-
-    //8. Создайте две переменные с целыми числами. Если переменные равны друг другу, то вывести сообщение "Сумма чисел равна" и сумму чисел, если нет, то "Разница чисел равна" и разницу соответственно;
-    $num1 = 3;
-    $num2 = 3;
-    if($num1 === $num2){
-        echo 'Сумма чисел равна '.($num1 + $num2).'<br>';
-    } else
-        echo 'Разница чисел равна '.($num1 - $num2).'<br>';
-
-    //9. Создайте переменную с случайным числом от 1 до 100. Выведите число на страницу и сделайте проверку его на кратность, результат проверки так же вывести на экран;
-    $random = rand(1,100);
-    echo $random.'<br>';
-    if($random % 2){
-        echo 'Число не кратно 2'.'<br>';
-    } else
-        echo 'Число кратно 2'.'<br>';
+//    class Calc {
+//        protected $param1;
+//        protected $param2;
+//
+//        public function __construct($param1, $param2)
+//        {
+//            $this->param1 = $param1;
+//            $this->param2 = $param2;
+//        }
+//        function plus(){
+//            echo $this->param1 + $this->param2 .'</br>';
+//        }
+//        function minus(){
+//            echo $this->param1 - $this->param2.'</br>';
+//        }
+//        function pow (){
+//            echo $this->param1 * $this->param2.'</br>';
+//        }
+//        function delim (){
+//            echo $this->param1 / $this->param2.'</br>';
+//        }
+//
+//    }
+//    class Pow extends Calc{
+//
+//        function powSqr(){
+//            echo $this->pow();
+//        }
+//    }
+//
+//    $a = new Calc(1,2);
+//    $a->plus();
+//    $a->minus();
+//    $a->pow();
+//    $a->delim();
+//    $b = new Pow(2,2);
+//    $b->pow();
+//    $b->powSqr();
+//
+//    class Worker {
+//        public $name;
+//        public $age;
+//        public $salary;
+//
+//        public function __construct($name, $age, $salary)
+//        {
+//            $this->name = $name;
+//            $this->age = $age;
+//            $this->salary = $salary;
+//        }
+//        function getSalary(){
+//            return $this->salary;
+//        }
+//        function getAge(){
+//            return $this->age;
+//        }
+//
+//    }
+//    $worker1 = new Worker('Иван', 25, 100);
+//    $worker2 = new Worker('Вася',26,200);
+//    echo (int)$worker1->getSalary() + (int)$worker2->getSalary().'</br>';
+//    echo $worker1->getAge() + $worker2->getAge().'</br>';
     ?>
 
 </main>
 
-<?php
-    phpinfo()
-?>
 </body>
 
 </html>
-<?php
-phpinfo();
