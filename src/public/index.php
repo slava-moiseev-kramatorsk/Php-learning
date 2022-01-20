@@ -17,74 +17,100 @@
 <main style="display: flex; justify-content:center; margin-top: 25px;">
     <?php
 
-   // 1. Создать переменную $name и задать ей значение с именем, результат вывести на страницу с помощью echo;
-    $name = 'slava';
-    echo $name.'<br>' ;
-    //2. Создать две переменные $а = 8 и $b = 1, вывести на страницу результаты основных математических операций (+ - / * и остаток от деления (%));
-    $a = 8;
-    $b = 1;
-    echo ($a + $b).'<br>';
-    echo ($a - $b).'<br>';
-    echo ($a / $b).'<br>';
-    echo ($a * $b).'<br>';
-    echo ($a % $b).'<br>';
-    //3. Создайте переменную $number = 5, в переменную $result запишите значение $number в 3 степени. Результат выведите на экран.
-    $number = 5;
-    $result = pow($number,3);
-    echo $result.'<br>';
+   class Figure{
+       protected $type;
+       function getType(){
+           return $this->type;
+       }
+       function square(){}
+       function perimeter(){}
+   }
+   class Circle extends Figure {
+       protected $rad;
+       public function __construct($rad)
+       {
+           $this->rad = $rad;
+       }
+       function square(){
+           echo 'площадь : '. 3.14 *($this->rad**2). ', ';
+       }
+       function perimeter(){
+           echo 'периметр : ' . 3.14 *($this->rad*2). '</br>';
+       }
+       function getType(){
+           echo 'Фигура : круг, ';
+       }
 
-    //4. Внесите в переменную $age ваш возраст. Если возраст в пределах от 18 до 60 лет, то выведите на экран сообщение "Вам ещё работать и работать";
-    $age = 32;
-    if( $age > 18 && $age < 60 ){
-        echo 'Вам еще работать и работать !'.'<br>';
+   }
+
+    class Triangle extends Figure{
+        protected $a;
+        protected $b;
+        protected $c;
+        public function __construct($a, $b, $c)
+        {
+            $this->a = $a;
+            $this->b = $b;
+            $this->c = $c;
+        }
+        function getType()
+        {
+            echo 'Фигура : треугольник, ';
+        }
+        function square(){
+            echo 'площадь : '. 0.5 *($this->a * $this->b) . ', ';    // прямоугольный треугольник
+        }
+        function perimeter(){
+            echo 'периметр : ' . ($this->a + $this->b + $this->c) . '</br>';
+        }
+
     }
 
-    //5. Расширьте задачу 4. Если возраст меньше 18 или больше 60, то вывести сообщения "Вам ещё рано работать" и "Пора на отдых" соответственно;
-    if( $age <18 ){
-        echo 'Вам еще рано работать'.'<br>';
-    } else {
-        echo 'Пора на отдых'.'<br>';
+    class Square extends Figure{
+        protected $height;
+        public function __construct($height)
+        {
+            $this->height = $height;
+        }
+
+        function square()
+        {
+            echo 'площадь : '. $this->height**2 . ', ';
+        }
+        function getType()
+        {
+            echo  'Фигура : квадрат, ';
+        }
+        function perimeter(){
+            echo 'периметр : ' .  $this->height * 4 . '</br>';
+        }
     }
-    //6. Создайте переменную $dayNumber с номером для недели. Если номер дня в пределах от 1 до 5 то вывести сообщение "Это рабочий день", если 6-7 то "Это выходной", если значение $dayNumber не в пределах 1-7 то вывести сообщение об ошибке;
-    $dayNumber = 8;
-    if($dayNumber >= 1 && $dayNumber <= 5){
-        echo 'Это рабочий день'.'<br>';
-    } else if($dayNumber >= 6 && $dayNumber <= 7){
-        echo 'Это выходной'.'<br>';
-    } else {
-        echo 'Error'.'<br>';
-    }
 
-    //7. Объявите константу DAYS_COUNT равную 7 и константу MONTH_COUNT равную 12 двумя разными способами объявления констант. Выведите значение констант на страницу;
-    define('DAYS_COUNT', 7);
-    const MONTH_COUNT = 12;
-    echo MONTH_COUNT.'<br>';
-    echo DAYS_COUNT.'<br>';
+    $cirl = new Circle(3);
+   $cirl->getType();
+   $cirl->square();
+   $cirl->perimeter();
 
-    //8. Создайте две переменные с целыми числами. Если переменные равны друг другу, то вывести сообщение "Сумма чисел равна" и сумму чисел, если нет, то "Разница чисел равна" и разницу соответственно;
-    $num1 = 3;
-    $num2 = 3;
-    if($num1 === $num2){
-        echo 'Сумма чисел равна '.($num1 + $num2).'<br>';
-    } else
-        echo 'Разница чисел равна '.($num1 - $num2).'<br>';
+   $triang = new Triangle(3,4,5);
+   $triang->getType();
+   $triang->square();
+   $triang->perimeter();
 
-    //9. Создайте переменную с случайным числом от 1 до 100. Выведите число на страницу и сделайте проверку его на кратность, результат проверки так же вывести на экран;
-    $random = rand(1,100);
-    echo $random.'<br>';
-    if($random % 2){
-        echo 'Число не кратно 2'.'<br>';
-    } else
-        echo 'Число кратно 2'.'<br>';
+   $squar = new Square(5);
+   $squar->getType();
+   $squar->square();
+   $squar->perimeter();
+
+
     ?>
 
 </main>
 
 <?php
-    phpinfo()
+
 ?>
 </body>
 
 </html>
 <?php
-phpinfo();
+
