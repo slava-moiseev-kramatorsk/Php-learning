@@ -1,7 +1,6 @@
 <?php
 //namespace work;
- class Base {
-function welcome(){
+ abstract class Base {
+function welcome(){}
 
-}
 }
