@@ -7,7 +7,6 @@ interface RegistrationInterface{
     function repeatPassword();
     function checkEmail();
     function isEmail();
-    function isChechbox();
     function checkImage();
 
 }
@@ -17,12 +16,14 @@ class NewUser extends Base implements RegistrationInterface {
     public $password;
     public $repeatPassword;
     public $email;
-    public function __construct($name, $password, $repeatPassword,$email)
+    public $image;
+    public function __construct($name, $password, $repeatPassword,$email, $image)
     {
         $this->name = $name;
         $this->password = $password;
         $this->repeatPassword = $repeatPassword;
         $this->email = $email;
+        $this->image = $image;
     }
     function isName(){
         if (!$_POST['userName'] || strlen($_POST['userName']) < 5 ) {
@@ -82,12 +83,6 @@ class NewUser extends Base implements RegistrationInterface {
         }
         echo 'Введенные данные не соответствуют требованиям';
     }
-    function isChechbox(){
-        if (isset($_POST['checkbox'])){
-            setcookie('userName', $_POST['userName']);
-            setcookie('email', $_POST['email']);
-        }
-    }
 
     function checkImage(){
         if (isset($_FILES['your_file'])){
@@ -107,7 +102,7 @@ class NewUser extends Base implements RegistrationInterface {
 
 
 }
-$a = new NewUser($_POST['userName'], $_POST['password'] ,$_POST['password_confirm'], $_POST['email']);
+$a = new NewUser($_POST['userName'], $_POST['password'] ,$_POST['password_confirm'], $_POST['email'], $_FILES['your_file']);
 $a->isName();
 $a->checkPassword();
 $a->isPassword();
@@ -115,7 +110,6 @@ $a->repeatPassword();
 $a->checkEmail();
 $a->isEmail();
 $a->welcome();
-$a->isChechbox();
 $a->checkImage();
 var_dump($a->checkImage());
 ?>

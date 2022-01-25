@@ -1,22 +1,32 @@
 <?php
+
+//namespace work;
+session_start();
+$_SESSION['user'] = 'stepan';
+$_SESSION['password'] = 'Qwertyuiop12';
+
+
 include ("Registration.php");
+include ("Autoriz.php");
+include ("Welcome.php");
 
 interface AuthorizationInterface{
     function isName();
     function isPassword();
+    function isCheckbox();
     function autorisated();
 }
 
 class Autorization extends Base implements AuthorizationInterface{
-    public $userName;
+    public $user;
     public $password;
-    public function __construct($userName, $password)
+    public function __construct($user, $password)
     {
         $this->password = $password;
-        $this->userName = $userName;
+        $this->user = $user;
     }
     function isName(){
-        if ($_SESSION['userName'] == $_POST['userName']){
+        if ($_SESSION['user'] == $_POST['user']){
             return true;
         }
     }
@@ -31,12 +41,19 @@ class Autorization extends Base implements AuthorizationInterface{
             header('Location: http://example.palmo/Welcome.php');
         }
     }
-    function wel(){
-        header('Location: http://example.palmo/Welcome.php');
+
+    function isCheckbox(){
+        if (isset($_POST['checkbox'])) {
+                setcookie('user', $_POST['user']);
+                setcookie('password', $_POST['password']);
+        }
+
     }
 }
-$user = new Autorization('$userName', '$password');
-//$user->autorisated();
-$user->wel();
+$user1 = new Autorization($_POST['user'], $_POST['password']);
+$user1->autorisated();
+
+
+
 
 ?>
