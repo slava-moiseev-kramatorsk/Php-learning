@@ -7,8 +7,8 @@ $_SESSION['password'] = 'Qwertyuiop12';
 
 
 include ("Registration.php");
-include ("Autoriz.php");
-include ("Welcome.php");
+
+
 
 interface AuthorizationInterface{
     function isName();
